@@ -1,30 +1,36 @@
 class Solution {
 public:
     int maxDistance(string s, int k) {
-        int ans = 0;
-        vector<pair<char, char>> dirs = { {'N','E'}, {'N','W'}, {'S','E'}, {'S','W'} };
-        
-        for (auto d : dirs) {
-            int i = 0;
-            int pos = 0, opposite = 0;
-            
-            while (i < s.size()) {
-                if (s[i] == d.first || s[i] == d.second) {
-                    pos++;
-                } else {
-                    pos--;
-                    opposite++;
+        int maxDist = 0;
+
+        for (char xDir : {'E', 'W'}) {
+            for (char yDir : {'N', 'S'}) {
+                int flipsLeft = k;
+                int x = 0, y = 0;
+
+                for (char move : s) {
+                    char current = move;
+
+                    if (current == xDir && flipsLeft > 0) {
+                        current = (current == 'W') ? 'E' : 'W';
+                        flipsLeft--;
+                    }
+                    else if (current == yDir && flipsLeft > 0) {
+                        current = (current == 'S') ? 'N' : 'S';
+                        flipsLeft--;
+                    }
+
+                    if (current == 'E') x++;
+                    else if (current == 'W') x--;
+                    else if (current == 'N') y++;
+                    else if (current == 'S') y--;
+
+                    int dist = abs(x) + abs(y);
+                    maxDist = max(maxDist, dist);
                 }
-                
-                int flips = min(k, opposite);
-                int cur = pos + 2 * flips;
-                if (cur > ans) {
-                    ans = cur;
-                }
-                i++;
             }
         }
-        
-        return ans;
+
+        return maxDist;
     }
 };
