@@ -1,22 +1,18 @@
 class Solution {
 public:
+    void solve(int index, vector<int>& nums, vector<int>& temp, vector<vector<int>>& res){
+        res.push_back(temp);
+        for(int i=index;i<nums.size();i++){
+            temp.push_back(nums[i]);
+            solve(i+1,nums,temp,res);
+            temp.pop_back();
+        }
+
+    }
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> res;
-        int n=nums.size();
-        int total_sub=pow(2,n);
-        int i,j;
-        for(i=0;i<total_sub;i++){
-            vector<int> subset;
-            int p=1;
-            for(j=0;j<n;j++){
-                
-                if((i&p)!=0){
-                    subset.push_back(nums[j]);
-                }
-                p=p*2;
-            }
-            res.push_back(subset);
-        }
+        vector<int> temp;
+        solve(0,nums,temp,res);
         return res;
     }
 };
