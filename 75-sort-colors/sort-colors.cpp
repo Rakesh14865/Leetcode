@@ -6,12 +6,12 @@ public:
             if(nums[i]==0)z++;
             if(nums[i]==1)o++;
             if(nums[i]==2)t++;
-        }
+        }  
         int i=0;
         while(z>0) {
             nums[i]=0;
             i++;
-            z--;
+            z--; 
         }
         while(o>0) {
             nums[i]=1;
