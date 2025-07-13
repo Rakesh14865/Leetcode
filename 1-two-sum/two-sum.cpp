@@ -7,6 +7,7 @@ public:
             if (mp.count(req)) {
                 return {mp[req], i};
             }
+            
             mp[nums[i]] = i;
         }
         return {};
