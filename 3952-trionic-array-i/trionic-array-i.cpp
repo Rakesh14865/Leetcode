@@ -42,4 +42,7 @@ public:
         if (count<3 || q!=nums.size())return false;
         return true;
     }
+
+
+    // PHUCK YOU 
 };
